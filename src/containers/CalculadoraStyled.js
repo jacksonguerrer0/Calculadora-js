@@ -45,3 +45,13 @@ export const ButtonOperator = styled.button`
         background-color: #dfe4ec;
     }
 `
+export const ButtonReset = styled.button`
+    position: fixed;
+    right: 0;
+    top: 4rem;
+    border: none;
+    border-radius: 1rem;
+    color: white;
+    background-color: red;
+    padding: 1rem;
+`

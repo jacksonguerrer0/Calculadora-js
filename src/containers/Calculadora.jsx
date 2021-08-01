@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { ButtonData, ButtonOperator, ContainerCalculator, ContentButtonAction, ContentResults } from '../containers/CalculadoraStyled'
+import { ButtonData, ButtonOperator, ButtonReset, ContainerCalculator, ContentButtonAction, ContentResults } from '../containers/CalculadoraStyled'
 import { operationResult,  resetTodo, viewOperationNumber, viewOperationOperator } from '../redux/calculadoraDucks';
 
 const Calculadora = () => {
@@ -15,7 +15,6 @@ const Calculadora = () => {
         dispatch(viewOperationNumber(number))
     };
     const handleOperatorButton = ( e ) => {
-        result !== null && dispatch(resetTodo())
         const operator = e.target.textContent;
         dispatch(viewOperationOperator(operator))
     }
@@ -49,7 +48,7 @@ const Calculadora = () => {
                 <ButtonOperator onClick={handleResult}>=</ButtonOperator>
             </ContentButtonAction>
         </ContainerCalculator>
-        <button onClick={handleReset}>Reset</button>
+        <ButtonReset onClick={handleReset}>Reset</ButtonReset>
         <p style={{textAlign: 'center'}}>Jackson Guerrero @jacksonguerrer0</p>
         </>
     )

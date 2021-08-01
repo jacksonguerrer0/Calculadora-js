@@ -1,3 +1,4 @@
+import nerdamer from "nerdamer";
 import types from "./types/types";
 
 // constnates
@@ -43,6 +44,7 @@ export const viewOperationNumber = (number) => async (dispatch, getState) =>{
 
 export const viewOperationOperator = (operator) => async (dispatch, getState) =>{
     const {operation} = getState().result
+
     let endCaracter = operation[operation.length - 1];
     console.log(endCaracter)
     if(endCaracter === '+' || endCaracter === '-' || endCaracter === '*' || endCaracter === '/' || endCaracter === '.'){
@@ -68,7 +70,8 @@ export const viewOperat = (data) =>({
 export const operationResult = () => (dispatch, getState) =>{
     const { operation } = getState().result
     try {
-        let result = eval(operation)
+        let nerdResult = nerdamer(operation);
+        let result = nerdResult.symbol.multiplier.num.value
         dispatch(viewResult(result))
     } catch (error) {
         alert(error)
@@ -86,6 +89,7 @@ export const viewResult = (data) => ({
 //             return parseFloat(sum) + parseFloat(value);
 //         });
 // }
+
 
 export const resetTodo = () => ({
     type: types.reset
