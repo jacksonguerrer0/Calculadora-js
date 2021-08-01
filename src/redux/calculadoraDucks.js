@@ -26,12 +26,20 @@ export default calculadoraDucks
 
 // actions
 
-export const viewOperation = (data) => async (dispatch, getState) =>{
+export const viewOperationNumber = (number) => async (dispatch, getState) =>{
     const {operation} = getState().result
 
-    const newOperation = operation  + data + ","
-    dispatch(viewOperat(newOperation))
+    const newNumber = operation  + number
+    dispatch(viewOperat(newNumber))
 }
+export const viewOperationOperator = (operator) => async (dispatch, getState) =>{
+    const {operation} = getState().result
+
+    const newOperator = operation  + operator
+    dispatch(viewOperat(newOperator))
+}
+
+
 
 export const viewOperat = (data) =>({
     type: types.operation,
