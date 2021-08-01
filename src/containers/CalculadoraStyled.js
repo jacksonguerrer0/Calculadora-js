@@ -14,6 +14,7 @@ export const ContentResults = styled.div`
     padding: 1.2rem 1rem;
     border-radius: 10px;
     text-align: right;
+    height: 2rem;
 `
 export const ContentButtonAction = styled.div`
     display: grid;

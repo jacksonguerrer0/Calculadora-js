@@ -1,23 +1,38 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { ButtonData, ButtonOperator, ContainerCalculator, ContentButtonAction, ContentResults } from '../containers/CalculadoraStyled'
-import { viewOperationNumber, viewOperationOperator } from '../redux/calculadoraDucks';
+import { operationResult,  resetTodo, viewOperationNumber, viewOperationOperator } from '../redux/calculadoraDucks';
 
 const Calculadora = () => {
+    const {result} = useSelector(state => state.result)
     const dispatch = useDispatch()
     const {operation}= useSelector(state => state.result)
+
+
     const handleDataButton = ( e ) => {
+        result !== null && dispatch(resetTodo())
         const number =  parseFloat(e.target.textContent)
         dispatch(viewOperationNumber(number))
     };
     const handleOperatorButton = ( e ) => {
+        result !== null && dispatch(resetTodo())
         const operator = e.target.textContent;
         dispatch(viewOperationOperator(operator))
+    }
+    const handleResult = ( e ) =>{
+        dispatch(operationResult())
+    }
+    const handleReset = () =>{
+        dispatch(resetTodo())
     }
     return (
         <>
         <ContainerCalculator>
-            <ContentResults>{operation}</ContentResults>
+            <ContentResults>
+                {
+                    result ? result : operation
+                }
+            </ContentResults>
             <ContentButtonAction>
                 <ButtonData onClick={handleDataButton}>7</ButtonData>
                 <ButtonData onClick={handleDataButton}>8</ButtonData>
@@ -31,9 +46,10 @@ const Calculadora = () => {
                 <ButtonData onClick={handleDataButton}>0</ButtonData>
                 <ButtonOperator onClick={handleOperatorButton}>.</ButtonOperator>
                 <ButtonOperator onClick={handleOperatorButton}>+</ButtonOperator>
-                <ButtonOperator>=</ButtonOperator>
+                <ButtonOperator onClick={handleResult}>=</ButtonOperator>
             </ContentButtonAction>
         </ContainerCalculator>
+        <button onClick={handleReset}>Reset</button>
         <p style={{textAlign: 'center'}}>Jackson Guerrero @jacksonguerrer0</p>
         </>
     )
