@@ -6,6 +6,7 @@ const types = {
     reset: 'restablecer',
 
 
-    viewResult: 'Mostrar el resultado'
+    viewResult: 'Mostrar el resultado',
+    operation: 'operacion que se esta realizando'
 }
 export default types
