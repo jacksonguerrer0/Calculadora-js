@@ -3,5 +3,9 @@ const types = {
     restar: 'restar',
     dividir: 'dividir',
     multiplicar: 'multiplicar',
-    reset: 'restablecer'
+    reset: 'restablecer',
+
+
+    viewResult: 'Mostrar el resultado'
 }
+export default types

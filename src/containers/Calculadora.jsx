@@ -1,5 +1,5 @@
 import React from 'react'
-import { ButtonData, ButtonOperator, ContainerCalculator, ContentButtonAction, ContentResults } from '../redux/types/calculadoraDucks'
+import { ButtonData, ButtonOperator, ContainerCalculator, ContentButtonAction, ContentResults } from '../containers/CalculadoraStyled'
 
 const Calculadora = () => {
     return (
