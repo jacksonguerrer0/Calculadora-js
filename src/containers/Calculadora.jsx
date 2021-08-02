@@ -1,16 +1,14 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { ButtonData, ButtonOperator, ButtonReset, ContainerCalculator, ContentButtonAction, ContentResults } from '../containers/CalculadoraStyled'
-import { operationResult,  resetTodo, viewOperationNumber, viewOperationOperator } from '../redux/calculadoraDucks';
+import { operationResult,  resetTodo,  viewOperationNumber, viewOperationOperator } from '../redux/calculadoraDucks';
 
 const Calculadora = () => {
-    const {result} = useSelector(state => state.result)
     const dispatch = useDispatch()
     const {operation}= useSelector(state => state.result)
 
 
     const handleDataButton = ( e ) => {
-        result !== null && dispatch(resetTodo())
         const number =  parseFloat(e.target.textContent)
         dispatch(viewOperationNumber(number))
     };
@@ -29,7 +27,7 @@ const Calculadora = () => {
         <ContainerCalculator>
             <ContentResults>
                 {
-                    result ? result : operation
+                 operation
                 }
             </ContentResults>
             <ContentButtonAction>
