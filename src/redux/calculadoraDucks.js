@@ -1,4 +1,3 @@
-import nerdamer from "nerdamer";
 import types from "./types/types";
 import stringMatch from 'string-math'
 // constnates
