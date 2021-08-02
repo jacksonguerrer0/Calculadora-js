@@ -41,14 +41,20 @@ export default calculadoraDucks
 
 export const viewOperationNumber = (number) => async (dispatch, getState) =>{
     const {operation, result} = getState().result
-    let endCaracter = operation[operation.length - 1];
-    if(endCaracter !== '+' || endCaracter !== '-' || endCaracter !== '*' || endCaracter !== '/' || endCaracter !== '.'){
-        let removeEndCaracter = operation.slice(0, -1);
-        if (operation.length < 35){
-            const newOperator = removeEndCaracter  + number
-            dispatch(viewOperat(newOperator))
+    if(result !== null) {
+        let endCaracter = result[result.length - 1];
+        console.log(endCaracter)
+        if(endCaracter !== '+' || endCaracter !== '-' || endCaracter !== '*' || endCaracter !== '/' || endCaracter !== '.'){
+            dispatch(resetResult())
+            dispatch(viewOperat(number))
         }
     }
+        // let removeEndCaracter = operation.slice(0, -1);
+        // if (operation.length < 35){
+        //     const newOperator = removeEndCaracter  + number
+        //     dispatch(viewOperat(newOperator))
+        // }
+    // }
 
 
     if (operation.length < 35){
@@ -61,7 +67,6 @@ export const viewOperationOperator = (operator) => async (dispatch, getState) =>
     const {operation} = getState().result
 
     let endCaracter = operation[operation.length - 1];
-    console.log(endCaracter)
     if(endCaracter === '+' || endCaracter === '-' || endCaracter === '*' || endCaracter === '/' || endCaracter === '.'){
         let removeEndCaracter = operation.slice(0, -1);
         if (operation.length < 35){
@@ -96,9 +101,10 @@ export const operationResult = () => (dispatch, getState) =>{
         console.log(result)
         // let result = stringMath.symbol.multiplier.num.value
 
-        dispatch(viewResult(result))
+        // dispatch(viewResult(result))
         dispatch(resetOperation())
         dispatch(viewOperat(result.toString()))
+        dispatch(viewResult(result.toString()))
     } catch (error) {
         alert(error)
     }
