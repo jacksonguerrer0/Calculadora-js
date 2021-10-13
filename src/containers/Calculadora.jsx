@@ -1,7 +1,29 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { ButtonData, ButtonOperator, ButtonReset, ContainerCalculator, ContentButtonAction, ContentResults } from '../containers/CalculadoraStyled'
+import { createGlobalStyle } from 'styled-components';
+import { ButtonData, ButtonDelete, ButtonOperator, ButtonReset, ContainerCalculator, ContentButtonAction, ContentResults } from '../containers/CalculadoraStyled'
 import { operationResult,  resetTodo,  viewOperationNumber, viewOperationOperator } from '../redux/calculadoraDucks';
+import robotica from '../assets/Robotica.ttf';
+
+const GlobalStyle = createGlobalStyle`
+    @font-face {
+        font-family: 'robotica' ;
+        src: url(${robotica});
+    }
+    *,
+    *::before,
+    *::after{
+        box-sizing: border-box;
+        margin: 0;
+    }
+    body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: #35363A;
+    }
+`
 
 const Calculadora = () => {
     const dispatch = useDispatch()
@@ -24,13 +46,16 @@ const Calculadora = () => {
     }
     return (
         <>
+        <GlobalStyle />
         <ContainerCalculator>
             <ContentResults>
-                {
-                 operation
-                }
+                <p>{operation}</p>
+                <p>Vista previa</p>
             </ContentResults>
             <ContentButtonAction>
+                <ButtonReset onClick={handleReset}>C</ButtonReset>
+                <h2>Jack®</h2>
+                <ButtonDelete>✖</ButtonDelete>
                 <ButtonData onClick={handleDataButton}>7</ButtonData>
                 <ButtonData onClick={handleDataButton}>8</ButtonData>
                 <ButtonData onClick={handleDataButton}>9</ButtonData><ButtonOperator onClick={handleOperatorButton}>/</ButtonOperator>
@@ -46,8 +71,7 @@ const Calculadora = () => {
                 <ButtonOperator onClick={handleResult}>=</ButtonOperator>
             </ContentButtonAction>
         </ContainerCalculator>
-        <ButtonReset onClick={handleReset}>Reset</ButtonReset>
-        <p style={{textAlign: 'center'}}>Jackson Guerrero @jacksonguerrer0</p>
+        <p style={{textAlign: 'center'}}>Jackson Guerrero <a href="https://github.com/jacksonguerrer0" style={{color: 'whitesmoke', textDecoration : 'none'}}>@jacksonguerrer0</a></p>
         </>
     )
 }

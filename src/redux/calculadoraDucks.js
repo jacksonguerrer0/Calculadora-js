@@ -42,10 +42,14 @@ export const viewOperationNumber = (number) => async (dispatch, getState) =>{
     const {operation, result} = getState().result
     if(result !== null) {
         let endCaracter = result[result.length - 1];
+        let endCaracterOp = operation[operation.length  - 1]
         console.log(endCaracter)
         if(endCaracter !== '+' || endCaracter !== '-' || endCaracter !== '*' || endCaracter !== '/' || endCaracter !== '.'){
             dispatch(resetResult())
-            dispatch(viewOperat(number))
+            // dispatch(resetOperation())
+            // dispatch(viewOperat(number.toString()))
+            // const newNumber = result  + number
+            // dispatch(viewOperat(newNumber.toString()))
         }
     }
         // let removeEndCaracter = operation.slice(0, -1);
@@ -56,9 +60,11 @@ export const viewOperationNumber = (number) => async (dispatch, getState) =>{
     // }
 
 
-    if (operation.length < 35){
-        const newNumber = operation  + number
-        dispatch(viewOperat(newNumber))
+    else{
+        if (operation.length < 35){
+            const newNumber = operation  + number
+            dispatch(viewOperat(newNumber))
+        }
     }
 }
 
