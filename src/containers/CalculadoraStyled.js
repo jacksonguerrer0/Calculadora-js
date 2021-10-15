@@ -8,7 +8,10 @@ export const ContainerCalculator = styled.div`
     margin: auto;
     border-radius: 1rem;
     background-color: #5A5C68;
-    font-family: 'robotica';;
+    font-family: 'robotica';
+    @media screen and (min-width: 450px){
+        width: 400px;
+    }
 `
 export const ContentResults = styled.div`
     display: flex;
@@ -25,6 +28,18 @@ export const ContentResults = styled.div`
     color: #f9ffed;
     letter-spacing: 0.1rem;
     font-size: 4vw;
+    p:nth-child(1){
+        width: 100%;
+        height: 3rem;
+        background-color: inherit;
+        text-align: right;
+        color: inherit;
+        font-family: inherit;
+        font-size: 1.5rem;
+        letter-spacing: 0.1rem;
+        border: none;
+        outline: 0;
+    }
     p:nth-child(1){
         width: 100%;
         overflow-x: scroll;
@@ -51,6 +66,10 @@ export const ContentResults = styled.div`
     p:nth-child(1)::-webkit-scrollbar-track:active {
     background: #d4d4d4;
     }
+    @media screen and (min-width: 450px){
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
 `
 export const ContentButtonAction = styled.div`
     display: grid;
@@ -63,6 +82,11 @@ export const ContentButtonAction = styled.div`
         color: whitesmoke;
         text-align: center;
         font-size: 7vw;
+    }
+    @media screen and (min-width: 450px){
+        h2{
+            font-size: 2.5rem;
+        }
     }
 `
 export const ButtonData = styled.button`
@@ -77,6 +101,10 @@ export const ButtonData = styled.button`
     &:active{
         background-color: #767e96;
     }
+    @media screen and (min-width: 450px){
+        padding: 1rem 0;
+        font-size: 2rem;
+    }
 `
 export const ButtonOperator = styled.button`
     border: none;
@@ -89,6 +117,10 @@ export const ButtonOperator = styled.button`
     transition: background-color 0.5s ease;
     &:active{
         background-color: #dfe4ec;
+    }
+    @media screen and (min-width: 450px){
+        padding: 1rem 0;
+        font-size: 2rem;
     }
 `
 export const ButtonReset = styled.button`
@@ -104,6 +136,10 @@ export const ButtonReset = styled.button`
     &:active{
         background-color: #767e96;
     }
+    @media screen and (min-width: 450px){
+        padding: 1rem 0;
+        font-size: 2rem;
+    }
 `
 export const ButtonDelete = styled.button`
     grid-column: 4/5;
@@ -116,5 +152,9 @@ export const ButtonDelete = styled.button`
     transition: background-color 0.5s ease;
     &:active{
         background-color: #767e96;
+    }
+    @media screen and (min-width: 450px){
+        padding: 1rem 0;
+        font-size: 2rem;
     }
 `

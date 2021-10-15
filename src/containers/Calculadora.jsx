@@ -44,6 +44,7 @@ const Calculadora = () => {
     const handleReset = () =>{
         dispatch(resetTodo())
     }
+    console.log(operation)
     return (
         <>
         <GlobalStyle />
