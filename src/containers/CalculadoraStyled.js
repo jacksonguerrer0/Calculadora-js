@@ -68,13 +68,13 @@ export const ContentResults = styled.div`
     p:nth-child(1)::-webkit-scrollbar-track:active {
     background: #d4d4d4;
     }
-    p:nth-child(1){
+    p:nth-child(2){
         width: 100%;
         background-color: inherit;
         text-align: right;
         color: inherit;
         font-family: inherit;
-        font-size: 1.5rem;
+        font-size: 1rem;
         letter-spacing: 0.1rem;
         border: none;
         outline: 0;
