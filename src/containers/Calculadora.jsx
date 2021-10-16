@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { createGlobalStyle } from 'styled-components';
 import { ButtonData, ButtonDelete, ButtonOperator, ButtonReset, ContainerCalculator, ContentButtonAction, ContentResults } from '../containers/CalculadoraStyled'
-import { operationResult,  resetTodo,  viewOperationNumber, viewOperationOperator } from '../redux/calculadoraDucks';
+import { deleteDigitOperation,  operationResult,  resetTodo,  viewOperationNumber, viewOperationOperator } from '../redux/calculadoraDucks';
 import robotica from '../assets/Robotica.ttf';
 
 const GlobalStyle = createGlobalStyle`
@@ -28,7 +28,7 @@ const GlobalStyle = createGlobalStyle`
 const Calculadora = () => {
     const dispatch = useDispatch()
     const {operation}= useSelector(state => state.result)
-
+    const {result} = useSelector(state => state.result)
 
     const handleDataButton = ( e ) => {
         const number =  parseFloat(e.target.textContent)
@@ -44,20 +44,44 @@ const Calculadora = () => {
     const handleReset = () =>{
         dispatch(resetTodo())
     }
-    console.log(operation)
+    const handleDelete = () => {
+        dispatch(deleteDigitOperation())
+    }
+    const handleKeyboard = (e) => {
+        let arrData = [0,1,2,3,4,5,6,7,8,9]
+        let arrOperator = ['.', '-', '+', '*', '/']
+        let num = Number(e.key)
+        if(arrData.includes(num) === true){
+            dispatch(viewOperationNumber(num))
+        } else if(arrOperator.includes(e.key) === true){
+            dispatch(viewOperationNumber(e.key))
+        } else if (e.key === 'Enter'){
+            dispatch(operationResult())
+        } else if (e.key === 'Backspace' || e.key === 'x'){
+            dispatch(deleteDigitOperation())
+        } else if (e.key === 'c'){
+            dispatch(resetTodo())
+        }
+    }
+    useEffect(() => {
+        document.addEventListener('keydown',handleKeyboard)
+        return () => {
+            document.removeEventListener('keydown', handleKeyboard )
+        }
+    } )
     return (
         <>
         <GlobalStyle />
         <ContainerCalculator>
             <ContentResults>
-                <p>{operation}</p>
-                <p>Vista previa</p>
+                <p>{operation || 0}</p>
+                <p>{result || 0}</p>
             </ContentResults>
             <ContentButtonAction>
                 <ButtonReset onClick={handleReset}>C</ButtonReset>
                 <h2>Jack®</h2>
-                <ButtonDelete>✖</ButtonDelete>
-                <ButtonData onClick={handleDataButton}>7</ButtonData>
+                <ButtonDelete onClick={handleDelete} >✖</ButtonDelete>
+                <ButtonData onClick={handleDataButton} >7</ButtonData>
                 <ButtonData onClick={handleDataButton}>8</ButtonData>
                 <ButtonData onClick={handleDataButton}>9</ButtonData><ButtonOperator onClick={handleOperatorButton}>/</ButtonOperator>
                 <ButtonData onClick={handleDataButton}>4</ButtonData>

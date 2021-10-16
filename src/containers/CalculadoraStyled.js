@@ -27,10 +27,10 @@ export const ContentResults = styled.div`
     text-align: right;
     color: #f9ffed;
     letter-spacing: 0.1rem;
-    font-size: 4vw;
+    /* font-size: 4vw; */
     p:nth-child(1){
         width: 100%;
-        height: 3rem;
+        height: 2.5rem;
         background-color: inherit;
         text-align: right;
         color: inherit;
@@ -39,6 +39,7 @@ export const ContentResults = styled.div`
         letter-spacing: 0.1rem;
         border: none;
         outline: 0;
+        padding: 0;
     }
     p:nth-child(1){
         width: 100%;
@@ -46,6 +47,7 @@ export const ContentResults = styled.div`
     }
     p:nth-child(1)::-webkit-scrollbar{
         height: 0.5rem;
+        display: none;
     }
     p:nth-child(1)::-webkit-scrollbar-thumb {
     background: #ccc;
@@ -66,9 +68,53 @@ export const ContentResults = styled.div`
     p:nth-child(1)::-webkit-scrollbar-track:active {
     background: #d4d4d4;
     }
+    p:nth-child(1){
+        width: 100%;
+        background-color: inherit;
+        text-align: right;
+        color: inherit;
+        font-family: inherit;
+        font-size: 1.5rem;
+        letter-spacing: 0.1rem;
+        border: none;
+        outline: 0;
+    }
+    p:nth-child(2){
+        width: 100%;
+        overflow-x: scroll;
+    }
+    p:nth-child(2)::-webkit-scrollbar{
+        height: 0.5rem;
+        display: none;
+    }
+    p:nth-child(2)::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+    }
+    p:nth-child(2)::-webkit-scrollbar-thumb:hover {
+    background: #b3b3b3;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+    }
+    p:nth-child(2)::-webkit-scrollbar-thumb:active {
+    background-color: #999999;
+    }
+    p:nth-child(2)::-webkit-scrollbar-track {
+    background: #e1e1e1;
+    border-radius: 4px;
+    }
+    p:nth-child(2)::-webkit-scrollbar-track:hover,
+    p:nth-child(2)::-webkit-scrollbar-track:active {
+    background: #d4d4d4;
+    }
     @media screen and (min-width: 450px){
         font-size: 1rem;
         margin-bottom: 1rem;
+        p:nth-child(2)::-webkit-scrollbar{
+        display: block;
+        }
+        p:nth-child(1)::-webkit-scrollbar{
+        display: block;
+        }
     }
 `
 export const ContentButtonAction = styled.div`

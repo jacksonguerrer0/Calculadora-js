@@ -30,6 +30,11 @@ const calculadoraDucks = (state=initialState, action) => {
                 ...state,
                 operation: ''
             }
+        case types.delete:
+            return {
+                ...state,
+                operation: action.payload
+            }
         default:
             return state;
     }
@@ -39,100 +44,58 @@ export default calculadoraDucks
 // actions
 
 export const viewOperationNumber = (number) => async (dispatch, getState) =>{
-    const {operation, result} = getState().result
-    if(result !== null) {
-        let endCaracter = result[result.length - 1];
-        let endCaracterOp = operation[operation.length  - 1]
-        console.log(endCaracter)
-        if(endCaracter !== '+' || endCaracter !== '-' || endCaracter !== '*' || endCaracter !== '/' || endCaracter !== '.'){
-            dispatch(resetResult())
-            // dispatch(resetOperation())
-            // dispatch(viewOperat(number.toString()))
-            // const newNumber = result  + number
-            // dispatch(viewOperat(newNumber.toString()))
-        }
-    }
-        // let removeEndCaracter = operation.slice(0, -1);
-        // if (operation.length < 35){
-        //     const newOperator = removeEndCaracter  + number
-        //     dispatch(viewOperat(newOperator))
-        // }
-    // }
-
-
-    else{
-        if (operation.length < 35){
-            const newNumber = operation  + number
-            dispatch(viewOperat(newNumber))
-        }
-    }
+    const {operation} = getState().result
+    const newNumber = operation  + number
+    dispatch(resetResult())
+    dispatch(viewOperat(newNumber))
 }
 
 export const viewOperationOperator = (operator) => async (dispatch, getState) =>{
-    const {operation} = getState().result
-
+    const {operation, result} = getState().result
     let endCaracter = operation[operation.length - 1];
-    if(endCaracter === '+' || endCaracter === '-' || endCaracter === '*' || endCaracter === '/' || endCaracter === '.'){
-        let removeEndCaracter = operation.slice(0, -1);
-        if (operation.length < 35){
+    if(typeof(result) === 'string'){
+        let newOperation = result + operator
+        dispatch(resetResult())
+        dispatch(viewOperat(newOperation))
+    }else{
+        if(endCaracter === '+' || endCaracter === '-' || endCaracter === '*' || endCaracter === '/' || endCaracter === '.'){
+            let removeEndCaracter = operation.slice(0, -1);
             const newOperator = removeEndCaracter  + operator
             dispatch(viewOperat(newOperator))
+            dispatch(resetResult())
+        }else if(operation.length){
+            const newOperator = operation  + operator
+            dispatch(viewOperat(newOperator))
         }
-    }else if(operation.length < 35){
-        const newOperator = operation  + operator
-        dispatch(viewOperat(newOperator))
     }
 }
 
-
-
-export const viewOperat = (data) =>({
-    type: types.operation,
-    payload: data
-})
 
 
 export const operationResult = () => (dispatch, getState) =>{
     const { operation } = getState().result
     try {
-        // con nerdamer
-        // let nerdResult = nerdamer(operation);
-        // con eval funciona pero vercel no lo deja desplegar
-        // let evalr = eval(operation)
-        // console.log(evalr)
-
-        // con string math
         let result = stringMatch(operation)
-        console.log(result)
-        // let result = stringMath.symbol.multiplier.num.value
-
-        // dispatch(viewResult(result))
         dispatch(resetOperation())
-        dispatch(viewOperat(result.toString()))
         dispatch(viewResult(result.toString()))
     } catch (error) {
         alert(error)
     }
 }
-
+export const deleteDigitOperation = () => (dispatch, getState) => {
+    const { operation } = getState().result
+    const removeEndStr = operation.slice(0,-1)
+    dispatch(deleteOperation(removeEndStr))
+}
 export const viewResult = (data) => ({
     type: types.viewResult,
     payload: data
 })
 
-// function addbits(s) {
-//     return (s.replace(/\s/g, '').match(/[+\-]?([0-9\.]+)/g) || [])
-//         .reduce(function(sum, value) {
-//             return parseFloat(sum) + parseFloat(value);
-//         });
-// }
-// (string.match(/^(-?\d+)(\+-?\d+)*$/)) ? string.split('+').stringSum() : NaN;
-// }   
-// function sum(string) {
-//     return (string.match(/^(-?\d+)(\+-?\d+)*$/)) ? string.split('+') : NaN;
-//   }  
-// console.log(sum("5+5"))
-
+export const viewOperat = (data) =>({
+    type: types.operation,
+    payload: data
+})
 export const resetTodo = () => ({
     type: types.reset
 })
@@ -141,4 +104,8 @@ export const resetResult = () => ({
 })
 export const resetOperation = () => ({
     type: types.resetOperation
+})
+export const deleteOperation = (data) => ({
+    type: types.delete,
+    payload: data
 })
