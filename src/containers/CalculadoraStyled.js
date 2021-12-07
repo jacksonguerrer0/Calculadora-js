@@ -46,7 +46,7 @@ export const ContentResults = styled.div`
         overflow-x: scroll;
     }
     p:nth-child(1)::-webkit-scrollbar{
-        height: 0.5rem;
+        height: 0.3rem;
         display: none;
     }
     p:nth-child(1)::-webkit-scrollbar-thumb {
@@ -84,7 +84,7 @@ export const ContentResults = styled.div`
         overflow-x: scroll;
     }
     p:nth-child(2)::-webkit-scrollbar{
-        height: 0.5rem;
+        height: 0.3rem;
         display: none;
     }
     p:nth-child(2)::-webkit-scrollbar-thumb {
